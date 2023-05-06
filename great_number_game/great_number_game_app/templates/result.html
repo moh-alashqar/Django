@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    {% load static %}
+    <link type= "text/css" rel="stylesheet" href="{% static 'css/result_style.css' %}">
+    <style>
+        {% if request.session.attempts == 0 %}
+        .result_container {
+            display: none;
+        }
+        .container {
+            padding-top: 250px;
+        }
+        {% else %}
+        .container {
+            padding-top: 100px;
+        }
+        {% endif %}
+        .result_container {
+            background-color: {{ request.session.colo }} ;
+        }
+        {% if request.session.done %}
+        .interact {
+            display: none;
+        }
+        {% else %}
+        .again_button {
+            display: none;
+        }
+        {% endif %}
+    </style>
+</head>
+<body>
+    <form action="/process" class="container" method="post">
+        {% csrf_token %}
+        <div class="title">
+            <h1>Welcome to the Great Number Game!</h1>
+        </div>
+        <div class="description">
+            <h2>I am thinking of a number betweeen 1 and 100</h2>
+            <h2>Take a guess!</h2>
+        </div>
+        <div class="result_container">
+            <div class="main_container">
+                <div class="status_container">
+                    <p class="status">{{ request.session.status }}</p>
+                </div>
+                <p class="status">Attempts: {{ request.session.attempts }}</p>
+                <a class="again_button" href="/end">Play again!</a>
+            </div>
+        </div>
+        <div class="interact">
+            <input type="text" name="guess" class="input_text">
+            <button class="input_button">Submit</button>
+        </div>
+</body>
+</html>
