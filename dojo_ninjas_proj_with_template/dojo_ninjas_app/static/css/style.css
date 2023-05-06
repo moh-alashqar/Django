@@ -1,0 +1,64 @@
+#main_container {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+#add_container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding-bottom: 30px;
+}
+.input_container {
+    display: flex;
+}
+label {
+    display: block;
+    margin-right: 10px;
+    text-align: start;
+}
+.input_col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-around;
+}
+.input_button {
+    margin-top: 15px;
+}
+.main_list_items, .sub_list_items {
+    text-align: justify;
+}
+.main_list_items {
+    list-style: none;
+    font-weight: bold;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.sub_list_items {
+    margin-left: 30px;
+    list-style: circle;
+}
+#show_container {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+#list_count {
+    color: grey;
+    font-weight: lighter;
+    font-size: small;
+}
+#main_list_items_tools {
+    display: flex;
+    gap: 2px;
+    align-items: baseline;
+}
+#delete_btn {
+    border: none;
+    background-color: transparent;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

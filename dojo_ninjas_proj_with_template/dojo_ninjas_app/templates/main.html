@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Dojos and Ninjas</title>
+</head>
+<body>
+    <div id="main_container">
+        <div id="add_container">
+            <div class="form_container">
+                <form action="add_dojo" method="post">
+                    {% csrf_token %}
+                    <h1 class="form_title">Add a Dojo</h1>
+                    <div class="input_container">
+                        <div class="input_col">
+                            <label for="name">Name</label>
+                            <label for="city">City</label>
+                            <label for="state">State</label>
+                        </div>
+                        <div class="input_col">
+                            <input type="text" name="name" id="name">
+                            <input type="text" name="city" id="city">
+                            <input type="text" name="state" id="state">
+                        </div>
+                    </div>
+                    <input class="input_button" type="submit" value="Add">
+                </form>
+            </div>
+            <div class="form_container">
+                <form action="add_ninja" method="post">
+                    {% csrf_token %}
+                    <h1 class="form_title">Add a Ninja</h1>
+                    <div class="input_container">
+                        <div class="input_col">
+                            <label for="first_name">First Name</label>
+                            <label for="last_name">Last Name</label>
+                            <label for="dojo">Dojo</label>
+                        </div>
+                        <div class="input_col">
+                            <input type="text" name="first_name" id="first_name">
+                            <input type="text" name="last_name" id="last_name">
+                            <select name="dojo_id" id="dojo">
+                                {% for dojo in dojos %}
+                                <option value="{{ dojo.id }}">{{ dojo.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <input class="input_button" type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+        <div id="show_container">
+            <h1>All the Dojos</h1>
+            <ul id="list_container">
+                {% for dojo in dojos %}
+                <li class="main_list_items">Ninjas at the {{ dojo.name }} Dojo 
+                    <div id="main_list_items_tools">
+                        <span id="list_count">({{ dojo.ninjas.all|length }})</span>
+                        <form action="del_dojo" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="dojo_id" value="{{ dojo.id }}">
+                            <input id="delete_btn" type="submit" value="delete">
+                        </form>
+                    </div>
+                    {% for ninja in dojo.ninjas.all %}
+                    <li class="sub_list_items">{{ ninja.first_name }} {{ ninja.last_name }}</li>
+                    {% endfor %}
+                </li> 
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
