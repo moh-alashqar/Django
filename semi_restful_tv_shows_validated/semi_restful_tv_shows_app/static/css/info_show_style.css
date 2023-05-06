@@ -1,0 +1,21 @@
+
+#back_btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+#main_container {
+    width: 40%;
+    margin: 0 auto;
+}
+.title {
+    font-weight: bold;
+}
+#desc_container {
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+}
+#last_update {
+    margin-top: 100px;
+}
