@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a students to all bootcamp courses</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add_show_courses_style.css' %}">
+</head>
+<body>
+    <div id="main_container">
+        <div id="add_container">
+            <h1>Add a new course</h1>
+            <form action="/add_show_courses" id="courses_form" method="post">
+                {% csrf_token %}
+                <div id="form_cols">
+                    <div id="labels_col">
+                        <label for="name">Name:</label>
+                        <label for="desc">Description:</label>
+                    </div>
+                    <div id="inputs_col">
+                        <input id="name" name="name" type="text">
+                        <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <input id="add_btn" type="submit" value="Add">
+            </form>
+        </div>
+        <div id="show_container">
+            <h1>Courses</h1>
+            <table id="courses_table">
+                <tr id="header_tr">
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.desc }}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td><a href="/courses/destroy/{{ course.id }}">remove</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/show_book_style.css' %}">
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <div id="main_container">
+        <p id="book_id"><span id="book_id_title">ID:</span> {{ book.id }}</p>
+        <div id="desc_container">
+            <p id="book_desc_title">Description:</p>
+            <p id="book_desc">{{ book.desc }}</p>
+        </div>
+        <li class="main_list_item">Authors:</li>
+        {% for author in book.authors.all %}
+        <li class="list_item">{{ author.fist_name }} {{ author.last_name }}</li>
+        {% endfor %}
+        <div id="add_container">
+            <form id="add_form" action="/assign_book_author" method="post">
+                {% csrf_token %}
+                <select name="author_id" id="author_id">
+                    {% for unauthor in unauthors %}
+                    <option value="{{ unauthor.id }}">{{ unauthor.first_name }} {{ unauthor.last_name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="which_temp" value="/books/{{ book.id }}">
+                <input type="hidden" name="book_id" value="{{ book.id }}">
+                <input type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

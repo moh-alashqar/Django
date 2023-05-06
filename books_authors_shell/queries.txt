@@ -1,0 +1,99 @@
+## Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+>>> Book.objects.create(title="C Sharp", desc="C Sharp development tutorial")
+<Book: Book object (1)>
+>>> Book.objects.create(title="Java", desc="Java development tutorial")
+<Book: Book object (2)>
+>>> Book.objects.create(title="Python", desc="Python development tutorial")
+<Book: Book object (3)>
+>>> Book.objects.create(title="PHP", desc="PHP development tutorial")
+<Book: Book object (4)>
+>>> Book.objects.create(title="Ruby", desc="Ruby development tutorial")
+<Book: Book object (5)>
+
+## Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lau Tzu
+>>> Author.objects.create(first_name="Jane", last_name="Austen")
+<Author: Author object (1)>
+>>> Author.objects.create(first_name="Emily", last_name="Dickinson")
+<Author: Author object (2)>
+>>> Author.objects.create(first_name="Fyodor", last_name="Dostoevsky")
+<Author: Author object (3)>
+>>> Author.objects.create(first_name="William", last_name="Shakespeare")
+<Author: Author object (4)>
+>>> Author.objects.create(first_name="Lau", last_name="Tzu")
+<Author: Author object (5)>
+
+## Query: Change the name of the C Sharp book to C#
+>>> book1 = Book.objects.get(id=1)
+>>> book1.title = "C#"
+>>> book1.save()
+
+## Query: Change the first name of the 4th author to Bill
+>>> auth4 = Author.objects.get(id=4)
+>>> auth4.first_name = "Bill"
+>>> auth4.save()
+
+## Query: Assign the first author to the first 2 books
+>>> auth1 = Author.objects.get(id=1)
+>>> book1 = Book.objects.get(id=1)
+>>> book2 = Book.objects.get(id=2)
+>>> book1.authors.add(auth1)
+>>> book2.authors.add(auth1)
+
+## Query: Assign the second author to the first 3 books
+>>> auth2 = Author.objects.get(id=2)
+>>> book1 = Book.objects.get(id=1)
+>>> book2 = Book.objects.get(id=2)
+>>> book3 = Book.objects.get(id=3)
+>>> book1.authors.add(auth2)
+>>> book2.authors.add(auth2)
+>>> book3.authors.add(auth2)
+
+## Query: Assign the third author to the first 4 books
+>>> auth3 = Author.objects.get(id=3)
+>>> book1 = Book.objects.get(id=1)
+>>> book2 = Book.objects.get(id=2)
+>>> book3 = Book.objects.get(id=3)
+>>> book4 = Book.objects.get(id=4)
+>>> book1.authors.add(auth3)
+>>> book2.authors.add(auth3)
+>>> book3.authors.add(auth3)
+>>> book4.authors.add(auth3)
+
+## Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+>>> auth4 = Author.objects.get(id=4)
+>>> book1 = Book.objects.get(id=1)
+>>> book2 = Book.objects.get(id=2)
+>>> book3 = Book.objects.get(id=3)
+>>> book4 = Book.objects.get(id=4)
+>>> book5 = Book.objects.get(id=5)
+>>> book1.authors.add(auth4)
+>>> book2.authors.add(auth4)
+>>> book3.authors.add(auth4)
+>>> book4.authors.add(auth4)
+>>> book5.authors.add(auth4)
+
+## Query: Retrieve all the authors for the 3rd book
+>>> book3 = Book.objects.get(id=3)
+>>> book3.authors.all()
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+
+## Query: Remove the first author of the 3rd book
+>>> auth1 = Author.objects.get(id=1)
+>>> book3 = Book.objects.get(id=3)
+>>> book3.authors.remove(auth1)
+
+## Query: Add the 5th author as one of the authors of the 2nd book
+>>> auth5 = Author.objects.get(id=5)
+>>> book2.authors.add(auth5)
+
+## Query: Find all the books that the 3rd author is part of
+>>> auth3 = Author.objects.get(id=3)
+>>> auth3.books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+## Query: Find all the authors that contributed to the 5th book
+>>> book5 = Book.objects.get(id=5)
+>>> book5.authors.all()
+<QuerySet [<Author: Author object (4)>]>
+
+
