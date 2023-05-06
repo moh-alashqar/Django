@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manager</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="main_container">
+        <div id="show_container">
+            <h1>All the Users</h1>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+                {% for user in users %}
+                <tr style="background-color: #EEEEEE;">
+                    <td>{{user.id}}</td>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.age}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div id="create_container">
+            <h1>Add a User</h1>
+            <form action="create" method="post">
+                {% csrf_token %}
+                <div id="entities_container">
+                    <div id="1st_col">
+                        <label for="first_name">First Name</label>
+                        <label for="email">Email</label>
+                    </div>
+                    <div id="2nd_col">
+                        <input type="text" name="first_name" id="first_name">
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div id="3rd_col">
+                        <label for="last_name">Last Name</label>
+                        <label for="age">Age</label>
+                    </div>
+                    <div id="4th_col">
+                        <input type="text" name="last_name" id="last_name">
+                        <input type="text" name="age" id="age">
+                    </div>
+                </div>
+                <input class = "submit" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

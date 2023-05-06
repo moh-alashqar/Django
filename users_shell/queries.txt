@@ -1,0 +1,40 @@
+# Query: Create 3 new users
+User.objects.create(first_name = "Mohammed", last_name = "Alashqar", email_address = "mohammed.s.h.alashqar@gmail.com", age = 26)
+OUTPUT: <User: <User object: Mohammed Alashqar (1)>>
+
+User.objects.create(first_name = "user2_first", last_name = "user2_last", email_address = "user2@gmail.com", age = 30)
+OUTPUT: <User: <User object: user2_first user2_last (2)>>
+
+User.objects.create(first_name = "user3_first", last_name = "user3_last", email_address = "user3@gmail.com", age = 22)
+OUTPUT: <User: <User object: user3_first user3_last (3)>>
+
+# Query: Retrieve all the users
+User.objects.all()
+OUTPUT: <QuerySet [<User: <User object: Mohammed Alashqar (1)>>, <User: <User object: user2_first user2_last (2)>>, <User: <User object: user3_first user3_last (3)>>]>
+
+# Query: Retrieve the last user
+User.objects.last()
+OUTPUT: <User: <User object: user3_first user3_last (3)>>
+
+# Query: Retrieve the first user
+User.objects.first()
+OUTPUT: <User: <User object: Mohammed Alashqar (1)>>
+
+# Query: Change the user with id=3 so their last name is Pancakes.
+user_to_update = User.objects.get(id=3)
+user_to_update.last_name = "Pancakes"
+user_to_update.save()
+
+# Query: Delete the user with id=2 from the database
+user_to_delete = User.objects.get(id=2)
+user_to_delete.delete()
+OUTPUT: (1, {'users_app.User': 1})
+
+# Query: Get all the users, sorted by their first name 
+User.objects.all().order_by("first_name")
+OUTPUT: <QuerySet [<User: <User object: Mohammed Alashqar (1)>>, <User: <User object: user3_first Pancakes (2)>>]>
+
+# BONUS Query: Get all the users, sorted by their first name in descending order
+User.objects.all().order_by("-first_name")
+OUTPUT: <QuerySet [<User: <User object: user3_first Pancakes (2)>>, <User: <User object: Mohammed Alashqar (1)>>]
+

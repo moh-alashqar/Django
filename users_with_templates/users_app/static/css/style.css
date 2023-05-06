@@ -1,0 +1,30 @@
+#main_container {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+table {
+    width: 100%;
+}
+th {
+    background-color: #CCCCCC;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+#show_container {
+    margin-bottom: 20px;
+}
+#entities_container {
+    display: flex;
+    justify-content: space-between;
+}
+#create_container {
+    width: 85%;
+    margin: 0 auto;
+}
+.submit {
+    margin-top: 20px;
+    padding: 2px 20px;
+}
